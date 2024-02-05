@@ -1,0 +1,41 @@
+function onEdit(e) {
+  var range = e.range;
+  var sheet = range.getSheet();
+  var column = range.getColumn();
+  var row = range.getRow();
+
+  // Check if the edited cell is in the "Accepted" column and the edited value is not empty
+  if (column == getColumnByName(sheet, "Accepté") && e.value !== "") {
+    var discordId = sheet.getRange(row, 1).getValue(); // Assuming Discord ID is in the first column
+    var acceptedValue = e.value.toLowerCase(); // Convert to lowercase
+    if (acceptedValue === "oui" && discordId !== "") { // Only proceed if the edited value is "oui" and Discord ID is not empty
+      // Prepare the payload to send to Discord webhook
+      var payload = {
+        "content": discordId
+      };
+      
+      // Send payload to Discord webhook
+      sendToDiscordWebhook(payload);
+    }
+  }
+}
+
+function getColumnByName(sheet, name) {
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  for (var i = 0; i < headers.length; i++) {
+    if (headers[i].toLowerCase() == name.toLowerCase()) {
+      return i + 1;
+    }
+  }
+  return -1; // If column not found
+}
+
+function sendToDiscordWebhook(payload) {
+  var discordWebhookUrl = "WEBHOOK URL ---------------------------------";
+  var options = {
+    "method": "post",
+    "contentType": "application/json",
+    "payload": JSON.stringify(payload)
+  };
+  UrlFetchApp.fetch(discordWebhookUrl, options);
+}

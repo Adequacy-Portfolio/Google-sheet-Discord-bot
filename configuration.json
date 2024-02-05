@@ -1,0 +1,20 @@
+{
+  "bot": {
+    "token": "----Token----",
+    "status":"Postuler utilisant /appliquer"
+  },
+  "command":{
+    "nom":"appliquer",
+    "description":"postuler à un poste"
+  },
+  "formulaire": {
+    "champ_d'entree_1": {"name":"Pseudo", "espace reserve": "espace reserve" },
+    "champ_d'entree_2": {"name":"ID", "espace reserve":"espace reserve"},
+    "champ_d'entree_3": {"name":"Raison", "espace reserve":"espace reserve"},
+    "message":"message d'application"
+  },
+  "secret_bot":{"id":"id", "channel":"id","message":"Votre Message"
+  },
+  "google":{"spreadsheetid":"id","sample_range_name":"name"
+  }
+}
